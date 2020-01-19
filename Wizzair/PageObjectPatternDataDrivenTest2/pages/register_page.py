@@ -72,6 +72,6 @@ class RegisterPage(BasePage):
         errors_text_fact = []
         for i in range(len(visible_error_notices)):
             errors_text_fact.append(visible_error_notices[i].get_attribute("innerText") )
-        print(errors_text_fact)
-        print(errors_texts)
+        print("Bledy na stronie: ", errors_text_fact)
+        print("Bledy zakladane: ", errors_texts)
         assert errors_text_fact == errors_texts
