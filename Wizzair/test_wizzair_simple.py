@@ -13,6 +13,7 @@ gender = 'F'
 country_code = '+48'
 valid_phone_number = "123123123"
 invalid_email = "ssaasdf.pl"
+password= "Qwquyqruiy127378698!"
 
 class WizzairRegistration(unittest.TestCase):
     """
@@ -87,6 +88,7 @@ class WizzairRegistration(unittest.TestCase):
         driver.find_element_by_name("email").send_keys(invalid_email)
         # ======================
         # 8. Wpisz hasło
+        driver.find_element_by_name("password").send_keys(password)
         # ======================
         # 9. Wybierz narodowość
         # ======================
