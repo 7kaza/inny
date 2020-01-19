@@ -105,13 +105,23 @@ class WizzairRegistration(unittest.TestCase):
                 option.click()
                 break
         # 10. Zaznacz "Akceptuję Informację o polityce prywatności"
-
+        driver.find_element_by_xpath('//label[@for="registration-privacy-policy-checkbox"][@class="rf-checkbox__label"]').click()
+        # 11. Kliknij ZAREJESTRUJ
+        driver.find_element_by_xpath('//button[@data-test="booking-register-submit"]').click()
         """TEST: SPRAWDZAMY OCZEKIWANY REZULTAT"""
 
         # Wyszukuję wszystkie błędy
+        error_notices = driver.find_elements_by_xpath('//span[@class="rf-input__error__message"]/span')
         # Zapisuję widoczne błędy do listy visible_error_notices
+        visible_error_notices = []
+        for error in error_notices:
+            # Jesli jest widoczny, to dodaj do listy
+            if error.is_displayed():
+                visible_error_notices.append(error)
         # Sprawdzam, czy widoczny jest tylko jeden błąd
+        assert len(visible_error_notices) == 1
         # Sprawdzam treść widocznego błędu
+
         sleep(4)
 
 if __name__ == '__main__':
