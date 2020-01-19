@@ -14,6 +14,7 @@ country_code = '+48'
 valid_phone_number = "123123123"
 invalid_email = "ssaasdf.pl"
 password= "Qwquyqruiy127378698!"
+valid_country = "Niemcy"
 
 class WizzairRegistration(unittest.TestCase):
     """
@@ -91,7 +92,18 @@ class WizzairRegistration(unittest.TestCase):
         driver.find_element_by_name("password").send_keys(password)
         # ======================
         # 9. Wybierz narodowość
-        # ======================
+        country_field = driver.find_element_by_xpath('//input[@data-test="booking-register-country"]')
+        country_field.click()
+        # Wyszukaj kraje
+        country_to_choose = driver.find_element_by_xpath("//div[@class='register-form__country-container__locations']")
+        countries = country_to_choose.find_elements_by_tag_name("label")
+        for label in countries:
+            option=label.find_element_by_tag_name('strong')
+            # print(d.text)
+            if option.get_attribute("innerText") == valid_country:
+                option.location_once_scrolled_into_view
+                option.click()
+                break
         # 10. Zaznacz "Akceptuję Informację o polityce prywatności"
 
         """TEST: SPRAWDZAMY OCZEKIWANY REZULTAT"""
