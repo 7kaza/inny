@@ -1,9 +1,9 @@
-# import unittest
-# from selenium import webdriver
-# from time import sleep
-# from selenium.webdriver.support.ui import WebDriverWait
-# from selenium.webdriver.support import expected_conditions as EC
-# from selenium.webdriver.common.by import By
+import unittest
+from selenium import webdriver
+from time import sleep
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 # from selenium.webdriver.common.action_chains import ActionChains
 
 # Dane testowe - ("lamerski" hardcode)
@@ -32,13 +32,19 @@ class WizzairRegistration(unittest.TestCase):
         używając adresu email - dane niepoprawne
         (niekompletny email brak '@')
         """
+        driver = self.driver
         # KROKI:
         # ======================
         # 1. Kliknij w prawym górnym rogu ZALOGUJ SIĘ
-        # Czekam maks. 5 sekund, aż będzie można kliknąć przycisk ZALOGUJ
+        # Czekam maks. 15 sekund, aż będzie można kliknąć przycisk ZALOGUJ
         # ======================
+        zaloguj_btn = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[data-test="navigation-menu-signin"]')))
+        #zaloguj_btn = driver.find_element_by_css_selector('button[data-test="navigation-menu-signin"]')
+        zaloguj_btn.click()
         # 2. Kliknij REJESTRACJA
         # ======================
+        rejestracja_btn = driver.find_element_by_xpath('//button[text()=" Rejestracja "]')
+        rejestracja_btn.click()
         # 3. Wprowadź imię
         # ======================
         # 4. Wprowadź nazwisko
@@ -62,6 +68,7 @@ class WizzairRegistration(unittest.TestCase):
         # Zapisuję widoczne błędy do listy visible_error_notices
         # Sprawdzam, czy widoczny jest tylko jeden błąd
         # Sprawdzam treść widocznego błędu
+        sleep(4)
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
