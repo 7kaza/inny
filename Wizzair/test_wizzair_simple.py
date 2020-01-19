@@ -11,6 +11,8 @@ valid_name = "Dick"
 valid_surname = "Laurent"
 gender = 'F'
 country_code = '+48'
+valid_phone_number = "123123123"
+invalid_email = "ssaasdf.pl"
 
 class WizzairRegistration(unittest.TestCase):
     """
@@ -79,8 +81,10 @@ class WizzairRegistration(unittest.TestCase):
         country_to_choose = WebDriverWait(self.driver, 40).until(EC.element_to_be_clickable((By.XPATH, "//li[@data-test='PL']")))
         country_to_choose.click()
         # 6.b. Wpisz nr telefonu
+        driver.find_element_by_name("phoneNumberValidDigits").send_keys(valid_phone_number)
         # ======================
         # 7. Wpisz niepoprawny e-mail (brak '@')
+        driver.find_element_by_name("email").send_keys(invalid_email)
         # ======================
         # 8. Wpisz hasło
         # ======================
@@ -94,7 +98,7 @@ class WizzairRegistration(unittest.TestCase):
         # Zapisuję widoczne błędy do listy visible_error_notices
         # Sprawdzam, czy widoczny jest tylko jeden błąd
         # Sprawdzam treść widocznego błędu
-        sleep(43)
+        sleep(4)
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
