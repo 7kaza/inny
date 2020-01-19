@@ -121,6 +121,8 @@ class WizzairRegistration(unittest.TestCase):
         # Sprawdzam, czy widoczny jest tylko jeden błąd
         assert len(visible_error_notices) == 1
         # Sprawdzam treść widocznego błędu
+        error_text = visible_error_notices[0].get_attribute("innerText")
+        assert error_text == "Nieprawidłowy adres e-mail"
 
         sleep(4)
 
