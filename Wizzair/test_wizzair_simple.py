@@ -96,13 +96,19 @@ class WizzairRegistration(unittest.TestCase):
         country_field.click()
         # Wyszukaj kraje
         country_to_choose = driver.find_element_by_xpath("//div[@class='register-form__country-container__locations']")
+        # Poszukaj elementow "label" wewnatrz listy "countries"
         countries = country_to_choose.find_elements_by_tag_name("label")
+        # Iteruj po kazdym elemencie w liscie "countries"
         for label in countries:
+            # Wewnatrz "label" znajdz element "strong"
             option=label.find_element_by_tag_name('strong')
-            # print(d.text)
+            # Jesli tekst elementu jest taki jak zadany w valid_country
             if option.get_attribute("innerText") == valid_country:
+                # Przewin do tego elementu
                 option.location_once_scrolled_into_view
+                # Kliknij
                 option.click()
+                # Wyjdz z petli - juz znalazlem i kliknalem
                 break
         # 10. Zaznacz "Akceptuję Informację o polityce prywatności"
         driver.find_element_by_xpath('//label[@for="registration-privacy-policy-checkbox"][@class="rf-checkbox__label"]').click()
@@ -123,8 +129,6 @@ class WizzairRegistration(unittest.TestCase):
         # Sprawdzam treść widocznego błędu
         error_text = visible_error_notices[0].get_attribute("innerText")
         assert error_text == "Nieprawidłowy adres e-mail"
-
-        sleep(4)
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
