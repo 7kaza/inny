@@ -97,7 +97,7 @@ class APRegistration(unittest.TestCase):
         # 16. Kliknij Register
         driver.find_element_by_id('submitAccount').click()
         # Pobierz bledy
-        errors = driver.find_elements_by_xpath('//div[@class="alert alert-danger"]/ol')
+        errors = driver.find_elements_by_xpath('//div[@class="alert alert-danger"]/ol/li')
         # Sprawdz, czy jest jeden blad
         assert len(errors) == 1
         # Pobierz jego tekst
